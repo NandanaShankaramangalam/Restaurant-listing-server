@@ -32,7 +32,23 @@ const fetchRestaurants = async (req, res) => {
     }
 }
 
+const editRestaurant = async (req, res) => {
+    try {
+        console.log('req.body=',req.body);
+        const { id, name, address, contact, description, image } = req.body;
+        await Restaurant.update({ name: name, address: address, contact: contact, description: description, image: image }, {
+            where: {
+                id: id    
+            }
+        })
+        res.status(200).json({ message: "success" });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 module.exports = {
     addRestaurant,
     fetchRestaurants,
+    editRestaurant,
 }

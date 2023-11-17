@@ -5,6 +5,7 @@ const router = Router()
 
 router.post('/add-restaurant', restaurantController.addRestaurant);
 router.get('/', restaurantController.fetchRestaurants);
+router.patch('/edit-restaurant', restaurantController.editRestaurant);
 
 
 module.exports = router;  
