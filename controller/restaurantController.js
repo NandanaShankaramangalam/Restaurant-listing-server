@@ -3,12 +3,6 @@ const Restaurant = require("../Models/RestaurantModel.js");
 const addRestaurant = async (req, res) => {
     try {
         const { name, address, contact, description, image } = req.body.datas;
-        console.log('req.body=',req.body);
-        console.log("name=", name);
-        // console.log("address=", address);
-        // console.log("contact=", contact);
-        // console.log("description=", description);
-        // console.log("image=", image);
         const result = await Restaurant.create({
             name,
             address,
@@ -47,8 +41,25 @@ const editRestaurant = async (req, res) => {
     }
 }
 
+const deleteRestaurant = async (req, res) => {
+    try {
+        console.log('id=',req.body);
+        const id = req.params.id
+        console.log('param id=',id);
+        await Restaurant.destroy({
+            where: {
+                id: id
+            }
+        })
+        res.status(200).json({ message: "success" });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 module.exports = {
     addRestaurant,
     fetchRestaurants,
     editRestaurant,
+    deleteRestaurant,
 }
